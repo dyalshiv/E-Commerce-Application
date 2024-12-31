@@ -21,29 +21,47 @@
 // sagaMiddleware.run(rootSaga)
 
 // export default {store,persistor}
-import { createStore } from 'redux';
+// import { createStore } from 'redux';
 
-// Initial state
-const initialState = {
-  count: 0,
-};
-console.log('-----State--->',initialState);
+// // Initial state
+// const initialState = {
+//   count: 0,
+// };
+// console.log('-----State--->',initialState);
 
-// Reducer function
-const reducer = (state = initialState, action) => {
-  console.log('action---->',action.type,'state---->',state);
+// // Reducer function
+// const reducer = (state = initialState, action) => {
+//   console.log('action---->',action.type,'state---->',state);
   
-  switch (action.type) {
-    case 'INCREMENT':
-      return { ...state, count: state.count + 1 };
-    case 'DECREMENT':
-      return { ...state, count: state.count - 1 };
-    default:
-      return state;
-  }
-};
+//   switch (action.type) {
+//     case 'INCREMENT':
+//       return { ...state, count: state.count + 1 };
+//     case 'DECREMENT':
+//       return { ...state, count: state.count - 1 };
+//     default:
+//       return state;
+//   }
+// };
 
-// Create store
-const store = createStore(reducer);
+// // Create store
+// const store = createStore(reducer);
+
+// export default store;
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import { Provider } from 'react-redux';
+// import postReducer from './reducers';
+// postReducer
+import rootSaga from './sagas';
+import postReducer from './reucers';
+
+// Saga Middleware
+const sagaMiddleware = createSagaMiddleware();
+
+// Redux Store with Middleware
+const store = createStore(postReducer, applyMiddleware(sagaMiddleware));
+
+// Run Sagas
+sagaMiddleware.run(rootSaga);
 
 export default store;

@@ -1,32 +1,57 @@
 import React, {useRef, useEffect, useState} from 'react';
 import {StyleSheet, Text, View, FlatList, Image, Pressable} from 'react-native';
 // import {categoriesList, bestSellersList} from '../../utils/MockData';
-import {appColors, shadow} from '../../utils/appColors';
-import TouchableRipple from 'react-native-touch-ripple';
-// import Label from '../../components/Label';
+// import {appColors, shadow} from '../../utils/appColors';
+import { TouchableRipple } from 'react-native-paper';
 
-import Product from '../../components/ProductCard'; 
+// import TouchableRipple from 'react-native-touch-ripple';
+// import Label from '../../components/Label';
+// import Product from '../../components/ProductCard'; 
 // import {} from 'react-native-size-matters';
 // import SearchBox from '../../components/SearchBox';
-// import TitleComp from '../../components/TitleComp';
- 
+//  import TitleComp from '../../components/TitleComp'; 
 // import ReduxWrapper from '../../utils/ReduxWrapper'; 
 import Container from './Container';
 import { categoriesList,bestSellersList } from '../android/app/utils/MockData';
+import { appColors,shadow } from '../android/app/utils/appColors';
+import Label from './Label/Label';
+import TitleComp from './Label/TitleComponent';
+// import ProductCard from './ProductCard';
  
-function Home({getProducts$,getProductsList$, addToCart$, navigation,products:{products}}) {
-  const nativeAdViewRef = useRef();
-    useEffect(() => { 
+function Home() {
+  // const nativeAdViewRef = useRef();
+  //   useEffect(() => { 
    
-    getProductsList$()
-  }, [ ]);  
+  //   getProductsList$()
+  // }, [ ]);  
    
-  // const RenderTitle = ({heading, rightLabel}) => {
-  //   return <TitleComp heading={heading} rightLabel={rightLabel} />;
-  // };
-  // const ProductCard = ({item}) => {
-  //   return <Product navigation={navigation} item={item} />;
-  // };
+  const RenderTitle = ({heading, rightLabel}) => {
+    return <TitleComp heading={heading} rightLabel={rightLabel} />;
+  };
+  const ProductCard = ({item}) => {
+    const {description,image,name,price} = item
+    
+    console.log('item----->',item);
+    
+    return (
+<View >
+  {/* <View style={{height:200,backgroundColor:'red',width:150,backgroundColor:"red"}}> */}
+  <Image resizeMode='contain' source={image}  style={{height:200,width:150}}/>
+  {/* </View> */}
+  <View style={{width:150}}>
+  <Label text ={name} style={{fontSize:17,fontWeight:'500'}}/>
+  </View>
+  <View style={{width:150}}>
+  <Label text ={description} style={{fontSize:12,fontWeight:'500'}}/>
+  </View>
+  <View style={{width:150}}>
+  <Label text ={price} style={{fontSize:20,fontWeight:'500'}}/>
+
+  </View>
+</View>
+    )
+  
+  };
   const onPress = () => {
     console.warn('i am clicked');
   };
@@ -65,7 +90,7 @@ function Home({getProducts$,getProductsList$, addToCart$, navigation,products:{p
                   <Icon />
                 </TouchableRipple>
                 <View style={{marginTop: (15)}}>
-                  {/* <Label text={label} style={{fontSize: (14)}} /> */}
+                  <Label text={label} style={{fontSize: (14)}} />
                 </View>
               </View>
             );
@@ -77,16 +102,16 @@ function Home({getProducts$,getProductsList$, addToCart$, navigation,products:{p
           <RenderTitle heading="Best Selling" rightLabel="See All" />
         </View>
 
-        {/* <FlatList
+        <FlatList
           showsHorizontalScrollIndicator={false}
-          ItemSeparatorComponent={() => <View style={{padding: (10)}} />}
+          // ItemSeparatorComponent={() => <View style={{paddingHorizontal: (3)}} />}
           horizontal
-          data={products}
+          data={bestSellersList}
           renderItem={({item, index}) => (
             
             <ProductCard key={index} item={item} />
           )}
-        /> */}
+        />
       </View>
     </Container>
   );

@@ -21,11 +21,12 @@ export default function Container({children,isScrollable,bodyStyle}) {
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        backgroundColor:'pink'
+        backgroundColor:'green',
+        paddingHorizontal:10
     },
     innerView:{
         flex:1,
-        // backgroundColor:"yellow",
-        paddingHorizontal:20
+       backgroundColor:"yellow",
+        //  paddingHorizontal:10
     }
 })

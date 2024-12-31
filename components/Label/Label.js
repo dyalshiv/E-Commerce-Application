@@ -5,7 +5,7 @@ import { appColors } from '../../android/app/utils/appColors'
 
 export default function Label({text,style}) {
     return (
-    <Text style={[styles.label,style]}>{text}</Text>
+    <Text numberOfLines={1} style={[styles.label,style]}>{text}</Text>
     )
 }
 
